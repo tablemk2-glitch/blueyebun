@@ -5,13 +5,13 @@
 
 // ⚠️ Firebase 콘솔 > 프로젝트 설정 > 일반 > 내 앱 에서 확인한 값으로 교체하세요
 const firebaseConfig = {
-  apiKey: "AIzaSyCweWWpQqbWRwA07-4yDSm7Oi6pawIpen8",
-  authDomain: "sehanchicken-44fe0.firebaseapp.com",
-  projectId: "sehanchicken-44fe0",
-  storageBucket: "sehanchicken-44fe0.firebasestorage.app",
-  messagingSenderId: "90969724322",
-  appId: "1:90969724322:web:b435e69424669a511b8efb",
-  measurementId: "G-5R0DK4Q65E"
+  apiKey: "AIzaSyAJmdzrOohQtG_nMy31sKujlsRGR5NdVKA",
+  authDomain: "blueyebun.firebaseapp.com",
+  projectId: "blueyebun",
+  storageBucket: "blueyebun.firebasestorage.app",
+  messagingSenderId: "622657898164",
+  appId: "1:622657898164:web:7423a3595c5ae6965ff9e1",
+  measurementId: "G-18HTEXG9NC"
 };
 
 firebase.initializeApp(firebaseConfig);
