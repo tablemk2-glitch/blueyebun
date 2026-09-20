@@ -1,0 +1,811 @@
+/* ============================================
+   style.css
+   Character Manager System - 공통 스타일시트
+   (다크 테마: 검정 바탕 + 파란색 강조)
+   ============================================ */
+
+/* ----------------------------------------
+   0. 변수 (색상 / 여백 / 폰트)
+   ---------------------------------------- */
+
+:root {
+
+    /* 브라우저 기본 UI(select 목록, 스크롤바 등)도 다크로 */
+    color-scheme: dark;
+
+    /* 검정 + 파랑 팔레트 */
+    --color-bg: #0a0c10;             /* 페이지 배경 (검정) */
+    --color-bg-soft: #131a26;        /* 입력창 / 보조 영역 배경 */
+    --color-surface: #0f141d;        /* 카드 배경 (배경보다 살짝 밝게) */
+    --color-surface-hover: #1a2436;
+    --color-bg-hover: #1a2436;       /* dice 섹션 호환용 (surface-hover와 동일) */
+
+    --color-border: #232e42;         /* 일반 보더 */
+    --color-border-strong: #2f5ea8;  /* 파란 보더 (포인트용) */
+
+    --color-text: #e6edf7;           /* 기본 글자색 (밝은 회백색) */
+    --color-text-muted: #8f9db3;
+
+    --color-primary: #4da3ff;        /* 글자/선 강조용 밝은 파랑 */
+    --color-primary-hover: #79b8ff;
+    --color-primary-soft: rgba(77, 163, 255, 0.14);
+
+    /* 흰 글자가 올라가는 배경용 진한 파랑 (버튼, 선택 상태) */
+    --color-primary-strong: #1f6feb;
+    --color-primary-strong-hover: #388bfd;
+    --color-primary-border: #58a6ff;
+
+    --color-accent: #58a6ff;         /* 보조 포인트 */
+    --color-accent-hover: #79b8ff;
+
+    --color-warning: #ffc857;        /* 대성공 (밝은 골드) */
+    --color-danger: #ff6b6b;         /* 대실패 */
+
+    --color-log-bg: #05070a;         /* 로그 박스 */
+    --color-log-text: #79c0ff;
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+
+    --shadow-card: 0 3px 14px rgba(0, 0, 0, 0.5);
+
+    --font-base: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic",
+        -apple-system, BlinkMacSystemFont, sans-serif;
+
+}
+
+/* ----------------------------------------
+   1. 리셋 / 기본
+   ---------------------------------------- */
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+html, body {
+
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-base);
+    line-height: 1.6;
+    min-height: 100vh;
+
+}
+
+h1, h2, h3, h4 {
+
+    margin: 0 0 12px 0;
+    color: var(--color-text);
+    font-weight: 800;
+
+}
+
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.05rem; color: var(--color-text-muted); font-weight: 700; }
+
+p {
+
+    margin: 0 0 8px 0;
+
+}
+
+a {
+
+    color: var(--color-primary);
+    text-decoration: none;
+
+}
+
+a:hover {
+
+    color: var(--color-primary-hover);
+
+}
+
+ul {
+
+    margin: 0;
+    padding-left: 20px;
+
+}
+
+/* ----------------------------------------
+   2. 헤더 / 로고 / 네비게이션
+   ---------------------------------------- */
+
+.header {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding: 16px 32px;
+
+    background: var(--color-surface);
+    border-bottom: 3px solid var(--color-primary);
+
+}
+
+.logo {
+
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: 0.5px;
+
+}
+
+/* battle.html처럼 <nav> 안에 그냥 <a> 태그만 있는 경우 */
+
+.header nav {
+
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+
+}
+
+.header nav a {
+
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    font-weight: 700;
+    transition: background 0.15s, color 0.15s;
+
+}
+
+.header nav a:hover {
+
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+
+}
+
+.header nav a.active {
+
+    background: var(--color-primary-strong);
+    color: #fff;
+
+}
+
+/* index.html처럼 class="navbar" / "nav-btn" 을 쓰는 경우 */
+
+.navbar {
+
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+
+}
+
+.nav-btn {
+
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    font-weight: 700;
+    transition: background 0.15s, color 0.15s;
+
+}
+
+.nav-btn:hover {
+
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+
+}
+
+.nav-btn.active {
+
+    background: var(--color-primary-strong);
+    color: #fff;
+
+}
+
+/* ----------------------------------------
+   3. 레이아웃 컨테이너
+   ---------------------------------------- */
+
+.container,
+.main-container {
+
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+}
+
+/* ----------------------------------------
+   4. Hero (소개 영역 - 남아있는 페이지 대비)
+   ---------------------------------------- */
+
+.hero {
+
+    text-align: center;
+    padding: 24px 12px 8px;
+
+}
+
+.hero h1 {
+
+    color: var(--color-primary);
+
+}
+
+.hero p {
+
+    color: var(--color-text-muted);
+
+}
+
+/* ----------------------------------------
+   5. 메뉴 그리드 (index.html)
+   ---------------------------------------- */
+
+.menu-grid {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+
+}
+
+.menu-card {
+
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 30px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+
+    text-decoration: none;   /* 링크 밑줄 제거 */
+    color: inherit;          /* 링크 기본 색상 방지 */
+    cursor: pointer;         /* 카드 전체가 클릭 가능함을 표시 */
+
+    box-shadow: var(--shadow-card);
+    transition: transform 0.15s, border-color 0.15s;
+
+}
+
+.menu-card:hover {
+
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+
+}
+
+.card-icon {
+
+    font-size: 2.5rem;
+    line-height: 1;
+
+}
+
+.menu-card h2 {
+
+    margin: 4px 0 0;
+    font-size: 1.15rem;
+    color: var(--color-text);
+
+}
+
+.menu-button {
+
+    margin-top: 10px;
+    padding: 10px 24px;
+    border-radius: 999px;
+
+    background: var(--color-primary-strong);
+    color: #fff;
+    font-weight: 800;
+
+    transition: background 0.15s;
+
+}
+
+.menu-button:hover {
+
+    background: var(--color-primary-strong-hover);
+    color: #fff;
+
+}
+
+/* ----------------------------------------
+   6. 정보 패널 / 표 (index.html 등)
+   ---------------------------------------- */
+
+.info-panel {
+
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+
+    box-shadow: var(--shadow-card);
+
+}
+
+table {
+
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+.info-table th,
+.info-table td,
+.stat-table th,
+.stat-table td,
+table th,
+table td {
+
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+
+}
+
+.info-table th {
+
+    width: 140px;
+    color: var(--color-text-muted);
+    font-weight: 700;
+
+}
+
+.stat-table thead th {
+
+    color: var(--color-primary);
+    font-weight: 800;
+    border-bottom: 2px solid var(--color-border-strong);
+
+}
+
+table tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+.rule-list {
+
+    list-style: none;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.rule-list li {
+
+    padding: 8px 12px;
+    background: var(--color-bg-soft);
+    border-radius: var(--radius-sm);
+
+}
+
+/* ----------------------------------------
+   7. 공용 카드 (status.html / dice.html / battle.html)
+   ---------------------------------------- */
+
+.card {
+
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+
+    box-shadow: var(--shadow-card);
+
+}
+
+/* ----------------------------------------
+   8. 폼 요소 (input / select / label / button)
+   ---------------------------------------- */
+
+label {
+
+    display: block;
+    margin-bottom: 4px;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+select,
+textarea {
+
+    width: 100%;
+    padding: 9px 12px;
+    margin-bottom: 14px;
+
+    background: var(--color-bg-soft);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 0.95rem;
+
+}
+
+input::placeholder,
+textarea::placeholder {
+
+    color: var(--color-text-muted);
+    opacity: 0.7;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
+
+}
+
+button {
+
+    padding: 9px 20px;
+
+    background: var(--color-bg-soft);
+    border: 2px solid var(--color-border-strong);
+    border-radius: 999px;
+    color: var(--color-text);
+
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+
+    transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.05s;
+
+}
+
+button:hover {
+
+    background: var(--color-primary-strong);
+    border-color: var(--color-primary-border);
+    color: #fff;
+
+}
+
+button:active {
+
+    transform: scale(0.97);
+
+}
+
+.btn-primary {
+
+    background: var(--color-primary-strong);
+    border-color: var(--color-primary-border);
+    color: #fff;
+
+}
+
+.btn-primary:hover {
+
+    background: var(--color-primary-strong-hover);
+    border-color: var(--color-primary-hover);
+
+}
+
+/* 캐릭터 관리 테이블(status.html)의 행 내 버튼은 조금 작게 */
+
+table button {
+
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    margin-right: 4px;
+
+}
+
+/* ----------------------------------------
+   9. 캐릭터 테이블 (status.html)
+   ---------------------------------------- */
+
+#characterTableBody tr:hover {
+
+    background: var(--color-bg-soft);
+
+}
+
+
+/* 캐릭터 추가/수정 폼 - 가로 배치 */
+.form-grid-horizontal {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 14px;
+    margin-bottom: 14px;
+
+}
+
+.form-grid-horizontal > div {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.field-name    { flex: 1 1 180px; }
+.field-stat    { flex: 0 1 80px; }
+.field-specialty { flex: 1 1 200px; }
+.field-memo    { flex: 2 1 260px; }
+
+.form-grid-horizontal input,
+.form-grid-horizontal textarea {
+
+    margin-bottom: 0;
+
+}
+
+.form-grid-horizontal textarea {
+
+    resize: vertical;
+    font-family: inherit;
+
+}
+
+.button-group {
+
+    display: flex;
+    gap: 8px;
+
+}
+
+/* 화면이 좁아지면 세로로 전환 */
+@media (max-width: 640px) {
+
+    .form-grid-horizontal {
+        flex-direction: column;
+    }
+
+    .field-name, .field-stat, .field-specialty, .field-memo {
+        flex: 1 1 auto;
+    }
+
+}
+
+/* ----------------------------------------
+   10. 다이스 판정 페이지 (dice.html) 공용
+   ---------------------------------------- */
+
+.dice-result,
+.result-text {
+
+    margin-top: 10px;
+    padding: 10px 14px;
+
+    background: var(--color-bg-soft);
+    border: 2px dashed var(--color-border-strong);
+    border-radius: var(--radius-sm);
+
+    font-weight: 800;
+    color: var(--color-primary);
+
+}
+
+.roll-success { color: var(--color-primary); }
+.roll-fail { color: var(--color-text-muted); }
+.roll-critical { color: var(--color-warning); }
+.roll-fumble { color: var(--color-danger); }
+
+#characterList {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+
+.character-select-row {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.character-preview {
+
+    margin: 6px 0 0 0;
+    padding: 6px 10px;
+
+    background: var(--color-bg-soft);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 4px;
+
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    max-width: 160px;
+
+}
+
+.result-copy-area {
+
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.result-text-block {
+
+    margin: 0;
+    padding: 10px 14px;
+
+    background: var(--color-bg-soft);
+    border: 2px dashed var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    min-height: 1.6em;
+
+}
+
+
+/* 선택된 캐릭터 버튼 색상 구분 */
+.character-select-item {
+    padding: 8px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg-soft);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.character-select-item:hover {
+    background: var(--color-bg-hover);
+    border-color: var(--color-primary);
+}
+
+.character-select-item.selected {
+    background: var(--color-primary-strong);
+    color: #fff;
+    border-color: var(--color-primary-border);
+    font-weight: bold;
+}
+
+/* 캐릭터별 상세 영역 (스탯 선택 + 미리보기) */
+.character-detail {
+    margin-top: 6px;
+    padding: 10px;
+    background: var(--color-bg-soft);
+    border-radius: 8px;
+    border-left: 3px solid var(--color-primary);
+}
+
+.character-stat-select {
+    display: block;
+    margin-bottom: 6px;
+    padding: 4px 8px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+}
+
+.character-preview {
+    font-size: 0.9em;
+    color: var(--color-text-muted);
+}
+
+#btnApplyAll {
+    margin-left: 8px;
+    padding: 4px 10px;
+    font-size: 0.85em;
+    background: var(--color-bg-hover);
+    color: var(--color-text);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.character-stat-line {
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.character-stat-line:hover {
+    background: var(--color-primary-soft);
+}
+.character-stat-line.stat-selected {
+    background: var(--color-primary-strong);
+    color: #fff;
+    font-weight: bold;
+}
+.character-select-item.expanded {
+    /* 필요시 펼쳐진 상태 스타일 */
+}
+
+#btnApplyAll:hover {
+    background: var(--color-border-strong);
+    border-color: var(--color-primary);
+}
+
+/* ----------------------------------------
+   # Footer
+   ---------------------------------------- */
+
+.footer {
+
+    text-align: center;
+    padding: 24px 12px;
+
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+
+    border-top: 2px solid var(--color-border);
+
+}
+
+/* ----------------------------------------
+   반응형
+   ---------------------------------------- */
+
+@media (max-width: 640px) {
+
+    .header {
+
+        padding: 14px 18px;
+        flex-direction: column;
+        align-items: flex-start;
+
+    }
+
+    .container,
+    .main-container {
+
+        padding: 20px 16px 40px;
+
+    }
+
+    .card,
+    .info-panel {
+
+        padding: 16px 18px;
+
+    }
+
+}
